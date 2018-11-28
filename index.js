@@ -113,8 +113,8 @@ function initChart() {
     .append('line')
     .attr('class', 'axis-line')
     .attr('stroke', '#ffffff')
-    .attr('x1', CHART_PADDING.left)
-    .attr('x2', CHART_PADDING.left)
+    .attr('x1', CHART_PADDING.left - 10)
+    .attr('x2', CHART_PADDING.left - 10)
     .attr('y1', CHART_PADDING.top + (height - yAxisHeight) / 2)
     .attr('y2', CHART_PADDING.top + (height + yAxisHeight) / 2);
 
@@ -275,7 +275,7 @@ function mergeToFullChart() {
 
   d3.select('#scrollContainer')
     .select('.header')
-    .text('Average cost of a night out in selected cities in 2018');
+    .text('Average costs of a night out in selected cities in 2018');
 
   d3.select('#cost-counter')
     .style('display', 'none');
