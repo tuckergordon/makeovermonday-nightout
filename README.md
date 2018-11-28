@@ -25,12 +25,16 @@ Anyways, following the guidelines from the folks at Makeover Monday, here was my
 ### How I tried to make it better
 
 #### Personalization via Scroller
+
+![scroller](https://raw.githubusercontent.com/tuckergordon/makeovermonday-nightout/master/screenshots/scroller.png)
+
 I started thinking about this question of personalization: how much would a night in these cities cost *me?* I've been [wanting to build a scroller](http://vallandingham.me/scroller.html) for a while now, and this problem seemed to lend itself very nicely. The user can select a city they're interested in (I wanted to select number of drinks too but ran out of time so I'll be implementing that later) and then the scroller will walk them through how much each item will cost.
 
 #### Clean color scheme
 Out with the color clutter and in with a color scheme that I knew worked. I actually pulled it pretty directly from this [beautiful article](https://pudding.cool/2018/11/titletowns/) by Sam Vickars over at the Pudding. Let's keep it clean while giving it a nice dark background (this is nighttime we're talking about, after all).
 
 #### Interactive stacked bar chart
+![main_chart](https://raw.githubusercontent.com/tuckergordon/makeovermonday-nightout/master/screenshots/main_chart.png)
 That static stacked bar chart from before? I still think it does it's job well, it just needs a little help. So to that, I added a filter for the items that also resorts the bars for easy comparison between items.
 
 ### Future Work
@@ -39,4 +43,5 @@ As mentioned earlier, I very much consider this a work in progress. Here are som
 - Add hover functionality to the chart. This is a no-brainer, I just ran out of time and deprioritized it
 - Highlight the selected legend item to make it obvious which one is selected (maybe fade the non-selected ones)
 - Improve overall responsiveness and code structure. I want the components used here (e.g. the timeline, the stacked bar chart) to be very reuseable for future projects, so there's definitely some work to be done
+- Improve accessibility.
 - Put it all in typescript. 
