@@ -116,6 +116,10 @@ p {
   margin-left: 40px;
   /* width: 500px; */
   position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
   top: 0px;
   float: right;
   width: 70%;
