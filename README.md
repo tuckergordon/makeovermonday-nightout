@@ -1,4 +1,4 @@
-# makeovermonday-nightout
+# Makeover Monday Week 48: A Night Out
 
 ## See the interactive visualization [here](https://tuckergordon.github.io/makeovermonday-nightout/)!
 
