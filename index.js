@@ -195,9 +195,24 @@ function updateChart(city, items) {
     .append('text')
     .attr('class', 'bar-item-label')
     .text((d, i) => {
-      return getLegendName(items[items.length - 1]) + ' - $' + (Math.round((d[1] - d[0]) * 100) / 100);
+      return getLegendName(items[items.length - 1]);
     })
     .attr('y', () => CHART_PADDING.top + height / 2 - 25 + 75)
+    // .attr('x', CHART_PADDING.bar + CHART_PADDING.left + width)
+    .attr('text-anchor', 'middle')
+    .attr('opacity', 0)
+    // .merge(bars)
+    .transition(t)
+    .attr('opacity', 1)
+    .attr('x', d => scaleX(d[0]) + CHART_PADDING.bar + (scaleX(d[1]) - scaleX(d[0])) / 2);
+
+  bars.enter()
+    .append('text')
+    .attr('class', 'bar-item-label')
+    .text((d, i) => {
+      return '$' + (Math.round((d[1] - d[0]) * 100) / 100);
+    })
+    .attr('y', () => CHART_PADDING.top + height / 2 - 25 + 100)
     // .attr('x', CHART_PADDING.bar + CHART_PADDING.left + width)
     .attr('text-anchor', 'middle')
     .attr('opacity', 0)
@@ -419,7 +434,7 @@ function mergeToFullChart() {
         console.log(d);
         return scaleX(d[1]) + CHART_PADDING.bar * 2 + 15;
       })
-   
+
       .attr('opacity', 0.9);
   }
 
