@@ -1,0 +1,53 @@
+city,country,item,cost
+Barcelona,Spain,Taxi,10.92
+Barcelona,Spain,Big Mac,4.75
+Barcelona,Spain,Club entry,24.67
+Barcelona,Spain,Longdrink,12.335
+Hong Kong,Hong Kong,Taxi,6.32
+Hong Kong,Hong Kong,Big Mac,2.87
+Hong Kong,Hong Kong,Club entry,25.55
+Hong Kong,Hong Kong,Longdrink,13.795
+Mexico City,Mexico,Taxi,2.52
+Mexico City,Mexico,Big Mac,3.01
+Mexico City,Mexico,Club entry,3.22
+Mexico City,Mexico,Longdrink,5.8
+Miami,USA,Taxi,10.37
+Miami,USA,Big Mac,4.81
+Miami,USA,Club entry,40
+Miami,USA,Longdrink,16
+Moscow,Russia,Taxi,7.12
+Moscow,Russia,Big Mac,2.29
+Moscow,Russia,Club entry,1.32
+Moscow,Russia,Longdrink,7.915
+New York,USA,Taxi,16.53
+New York,USA,Big Mac,5.09
+New York,USA,Club entry,25
+New York,USA,Longdrink,16
+Paris,France,Taxi,11.06
+Paris,France,Big Mac,5.37
+Paris,France,Club entry,14.8
+Paris,France,Longdrink,14.8
+Prague,Czech Republic,Taxi,8.63
+Prague,Czech Republic,Big Mac,3.74
+Prague,Czech Republic,Club entry,19.44
+Prague,Czech Republic,Longdrink,7.24
+Rio de Janeiro,Brazil,Taxi,5.21
+Rio de Janeiro,Brazil,Big Mac,5.61
+Rio de Janeiro,Brazil,Club entry,14.76
+Rio de Janeiro,Brazil,Longdrink,9.245
+Stockholm,Sweden,Taxi,19.91
+Stockholm,Sweden,Big Mac,5.62
+Stockholm,Sweden,Club entry,27.14
+Stockholm,Sweden,Longdrink,17.15
+Sydney,Australia,Taxi,10.4
+Sydney,Australia,Big Mac,4.42
+Sydney,Australia,Club entry,19.66
+Sydney,Australia,Longdrink,14.15
+Tokyo,Japan,Taxi,17.02
+Tokyo,Japan,Big Mac,3.5
+Tokyo,Japan,Club entry,18.58
+Tokyo,Japan,Longdrink,9.47
+Zurich,Switzerland,Taxi,24.38
+Zurich,Switzerland,Big Mac,6.89
+Zurich,Switzerland,Club entry,26.5
+Zurich,Switzerland,Longdrink,18.015

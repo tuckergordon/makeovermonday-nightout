@@ -1,0 +1,170 @@
+body {
+  /* background-color: #1B2029; */
+  background-color: #404040;
+}
+
+#opening {
+  height: 100vh;
+  width: 100%;
+}
+
+#opening-text {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 50%;
+}
+
+h3 {
+  color: white;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 36px;
+}
+
+p {
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+#opening-text label {
+  font-size: 24px;
+}
+
+#opening-text input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
+  font-style: italic;
+  margin-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#opening a {
+  position: relative;
+  float: left;
+  top: 80%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  /* padding-bottom: 60px; */
+  color: white;
+  text-decoration: none;
+}
+
+#opening a span {
+  position: relative;
+  float: left;
+  top: 80%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  margin-left: -18px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+}
+
+#container {
+  position: relative;
+}
+
+#sections {
+  width: 30%;
+  /* float: left; */
+  /* clear: left; */
+}
+
+#sections section {
+  height: 80vh;
+  /* background-color: lightblue; */
+  /* border: 1px solid lightcoral; */
+  opacity: 0.3;
+}
+
+#sections section.graph-scroll-active {
+  opacity: 1;
+}
+
+#sections section.spacer {
+  height: 100vh;
+  display: none;
+}
+
+/* #sections section h3 {
+  color: white;
+} */
+
+#content {
+  margin-left: 40px;
+  width: 500px;
+  position: sticky;
+  top: 0px;
+  float: right;
+  width: 70%;
+  /* background-color: lightseagreen; */
+  padding-top: 40px;
+}
+
+#content .city-name {
+  text-decoration: underline;
+}
+
+#cost-counter {
+  float: right;
+}
+
+#chartAll,
+#chart {
+  /* background-color: lightcoral; */
+  height: 60vh;
+  /* width: 600px; */
+  width: 80%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+text.bar-item-label {
+  fill: white;
+  stroke: none;
+  font-family: 'Open Sans', sans-serif;
+  /* font-weight: 100; */
+  font-size: 12px;
+}
+
+g.axis,
+g.tick {
+  stroke: white;
+  color: white;
+}
+
+g.axis,
+g.tick text {
+  stroke: none;
+  font-family: 'Open Sans', sans-serif;
+  /* font-weight: 100; */
+  font-size: 8px;
+}
+
+.legend .swatch {
+  cursor: pointer;
+}
+
+.legend text.label {
+  fill: #ffffff;
+  stroke: none;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  line-height: 20px;
+  font-size: 8px;
+}
