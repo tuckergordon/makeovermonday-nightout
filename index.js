@@ -1,5 +1,4 @@
 $(window).on('beforeunload', function () {
-  // $(window).scrollTop(0);
   $(function () {
     $('a[href*=\\#]').on('click', function (e) {
       e.preventDefault();
@@ -78,6 +77,9 @@ function initDropdown() {
     setCity(data[d3.select("#select-city").node().value]);
     initScroller();
     initChart();
+    $('html, body').animate({
+      scrollTop: $('#content').offset().top
+    }, 600, 'linear');
   });
 }
 
@@ -88,7 +90,7 @@ function initScroller() {
     .graph(d3.select('#content'))
     .sections(d3.selectAll('#sections > section'))
     .container(d3.select('#scrollContainer'))
-    .offset(300)
+    .offset(600)
     .on('active', function (i) {
       if (i > items.length) {
         mergeToFullChart();
