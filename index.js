@@ -59,12 +59,31 @@ d3.csv('data.csv', d => {
   }
   city.total += +d.cost;
 }).then(() => {
-  initScroller();
-  initChart();
+  initDropdown();
+  // initScroller();
+  // initChart();
   // chartAll();
 });
 
+function initDropdown() {
+  d3.select('#select-city')
+    .selectAll('option')
+    .data(Object.keys(data))
+    .enter()
+    .append('option')
+    .attr('value', d => data[d].city)
+    .text(d => data[d].city + ', ' + data[d].country);
+
+  $(document).on('change', '#select-city', function () {
+    setCity(data[d3.select("#select-city").node().value]);
+    initScroller();
+    initChart();
+  });
+}
+
 function initScroller() {
+  d3.select('#scrollContainer')
+    .style('display', 'block');
   d3.graphScroll()
     .graph(d3.select('#content'))
     .sections(d3.selectAll('#sections > section'))
@@ -99,15 +118,13 @@ function initChart() {
 
   svg.append('g')
     .attr('class', 'bars');
+}
 
-  setCity(data['New York'], svg);
-
-  function setCity(city, svg) {
-    selectedCity = city;
-    d3.select('#content')
-      .select('.city-name')
-      .html(city.city);
-  }
+function setCity(city) {
+  selectedCity = city;
+  d3.select('#content')
+    .select('.city-name')
+    .html(city.city);
 }
 
 function updateChart(city, items) {
@@ -172,24 +189,23 @@ function updateChart(city, items) {
       return scaleX(d[0]) + CHART_PADDING.bar;
     });
 
-  // bars.enter()
-  //   // .selectAll('text')
-  //   .append('text')
-  //   .attr('class', 'bar-item-label')
-  //   // .text((d, i)=> getLegendName(d.data[i]))
-  //   .text((d, i) => {
-  //     console.log(d);
-  //     return items[i] + ' - $' + (Math.round((d[1] - d[0]) * 100) / 100);
-  //   })
-  //   .attr('y', () => CHART_PADDING.top + height / 2 - 25 + 75)
-  //   .attr('x', CHART_PADDING.bar + CHART_PADDING.left + width)
-  //   .attr('text-anchor', 'middle')
-  //   .merge(bars)
-  //   .transition(t)
-  //   .attr('x', d => scaleX(d[0]) + CHART_PADDING.bar + (scaleX(d[1]) - scaleX(d[0])) / 2);
+  bars.enter()
+    .append('text')
+    .attr('class', 'bar-item-label')
+    .text((d, i) => {
+      return getLegendName(items[items.length - 1]) + ' - $' + (Math.round((d[1] - d[0]) * 100) / 100);
+    })
+    .attr('y', () => CHART_PADDING.top + height / 2 - 25 + 75)
+    // .attr('x', CHART_PADDING.bar + CHART_PADDING.left + width)
+    .attr('text-anchor', 'middle')
+    .attr('opacity', 0)
+    // .merge(bars)
+    .transition(t)
+    .attr('opacity', 1)
+    .attr('x', d => scaleX(d[0]) + CHART_PADDING.bar + (scaleX(d[1]) - scaleX(d[0])) / 2);
 
   d3.select('#cost-counter')
-    .text('$' + (cost + 50));
+    .text('Total: $' + (Math.round(cost * 100) / 100));
   // .transition(t)
   // .on("start", function () {
   //   d3.active(this)
@@ -202,7 +218,6 @@ function updateChart(city, items) {
   //       };
   //     });
   // });
-
 }
 
 function mergeToFullChart() {
@@ -223,8 +238,8 @@ function mergeToFullChart() {
   const legend = d3.legendColor()
     .scale(scaleColor)
     .labels(d => getLegendName(d))
-    .shapeHeight(10)
-    .shapeWidth(10)
+    .shapeHeight(16)
+    .shapeWidth(16)
     .shapePadding(4)
     .labelOffset(4)
     .on('cellclick', legendClick);
@@ -232,7 +247,21 @@ function mergeToFullChart() {
   svg.append('g')
     .attr('class', 'legend')
     .attr('transform', 'translate(' + width + ',' + (height / 2) + ')')
-    .call(legend);
+    .call(legend)
+    .append('text')
+    .text('Click to filter')
+    .attr('class', 'legend-instruction')
+    .attr('transform', 'translate(0, -10)');
+
+  svg.selectAll('.bar-item-label')
+    .remove();
+
+  d3.select('#scrollContainer')
+    .select('.header')
+    .text('Average cost of a night out in selected cities in 2018');
+
+  d3.select('#cost-counter')
+    .style('display', 'none');
 
   update(data, items);
 
@@ -241,9 +270,17 @@ function mergeToFullChart() {
       .keys(items)
       .value((d, key) => d.items[key]);
 
+    Object.keys(data)
+      .forEach(key => {
+        data[key]['itemTotal'] = 0;
+        items.forEach(item => {
+          data[key].itemTotal += data[key].items[item];
+        });
+      });
+
     const sortedData = Object.values(data)
       // invert
-      .sort((a, b) => a.total - b.total);
+      .sort((a, b) => a.itemTotal - b.itemTotal);
 
     const stackedData = stack(sortedData);
 
@@ -255,6 +292,8 @@ function mergeToFullChart() {
     const scaleX = d3.scaleLinear()
       .domain([0, max])
       .rangeRound([CHART_PADDING.left, width]);
+
+    console.log(sortedData.map(d => d.city));
 
     const scaleY = d3.scaleBand()
       .domain(sortedData.map(d => d.city))
@@ -298,6 +337,12 @@ function mergeToFullChart() {
           .call(axisY);
       });
 
+    if (svg.select('.axis-y').select('.axis-line').empty()) {
+      svg.select('.axis-y')
+        .transition(t)
+        .call(axisY);
+    }
+
     // bars
     const stackSeries = svg.selectAll('.bars')
       .selectAll('g')
@@ -338,7 +383,6 @@ function mergeToFullChart() {
       .attr('height', scaleY.bandwidth())
       .attr('width', 0)
       .attr('x', CHART_PADDING.bar + CHART_PADDING.left)
-
       .transition(d3.easeLinear)
       .duration(800)
       .attr('width', d => {
@@ -347,6 +391,25 @@ function mergeToFullChart() {
       .attr('x', d => {
         return scaleX(d[0]) + CHART_PADDING.bar;
       });
+
+    // bars.enter()
+    //   .merge(bars)
+    //   .filter(d => Math.abs(d[1] - d.data.itemTotal) < 1)
+    //   .append('text')
+    //   .attr('class', 'bar-total-label')
+    //   .text(d => '$' + (Math.round(d.data.itemTotal * 100) / 100))
+    //   .attr('opacity', 0)
+    //   .attr('y', d => {
+    //     return scaleY(d.data.city) + scaleY.bandwidth() / 2 + 6;
+    //   })
+    //   .attr('height', scaleY.bandwidth())
+    //   .attr('x', d => {
+    //     return scaleX(d.data.itemTotal) + CHART_PADDING.bar * 2;
+    //   })
+    //   .transition(t)
+    //   .delay(800)
+    //   .duration(800)
+    //   .attr('opacity', 0.9);
   }
 
   function legendClick(item) {
@@ -372,7 +435,7 @@ function getLegendName(d) {
     case 'clubEntry':
       return 'Club entry';
     case 'drink':
-      return 'Drink';
+      return '2 Longdrinks';
     case 'taxi':
       return 'Taxi';
     case 'bigMac':

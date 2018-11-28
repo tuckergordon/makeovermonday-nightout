@@ -36,7 +36,7 @@ p {
   font-size: 24px;
 }
 
-#opening-text input {
+#opening-text select {
   background: none;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
@@ -74,6 +74,10 @@ p {
   box-sizing: border-box;
 }
 
+#scrollContainer {
+  display: none;
+}
+
 #container {
   position: relative;
 }
@@ -106,7 +110,7 @@ p {
 
 #content {
   margin-left: 40px;
-  width: 500px;
+  /* width: 500px; */
   position: sticky;
   top: 0px;
   float: right;
@@ -119,6 +123,11 @@ p {
   text-decoration: underline;
 }
 
+#content .header {
+  margin-left: 100px;
+  margin-bottom: 0;
+}
+
 #cost-counter {
   float: right;
 }
@@ -126,9 +135,9 @@ p {
 #chartAll,
 #chart {
   /* background-color: lightcoral; */
-  height: 60vh;
+  height: 70vh;
   /* width: 600px; */
-  width: 80%;
+  width: 90%;
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -138,7 +147,13 @@ text.bar-item-label {
   fill: white;
   stroke: none;
   font-family: 'Open Sans', sans-serif;
-  /* font-weight: 100; */
+  font-size: 12px;
+}
+
+text.bar-total-label {
+  fill: white;
+  stroke: none;
+  font-family: 'Open Sans', sans-serif;
   font-size: 12px;
 }
 
@@ -153,7 +168,7 @@ g.tick text {
   stroke: none;
   font-family: 'Open Sans', sans-serif;
   /* font-weight: 100; */
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .legend .swatch {
@@ -166,5 +181,16 @@ g.tick text {
   font-family: 'Open Sans', sans-serif;
   font-weight: 100;
   line-height: 20px;
-  font-size: 8px;
+  font-size: 12px;
+}
+
+.legend text.legend-instruction {
+  fill: #ffffff;
+  stroke: none;
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  line-height: 20px;
+  font-size: 12px;
+  opacity: 0.8;
 }
