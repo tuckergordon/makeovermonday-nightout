@@ -362,7 +362,7 @@ function mergeToFullChart() {
       .selectAll('rect')
       .data(d => d, keyFunc);
 
-    bars.exit().remove();
+    // bars.exit().remove();
 
     bars.transition(t)
       .attr('y', d => {
@@ -394,24 +394,33 @@ function mergeToFullChart() {
         return scaleX(d[0]) + CHART_PADDING.bar;
       });
 
-    // bars.enter()
-    //   .merge(bars)
-    //   .filter(d => Math.abs(d[1] - d.data.itemTotal) < 1)
-    //   .append('text')
-    //   .attr('class', 'bar-total-label')
-    //   .text(d => '$' + (Math.round(d.data.itemTotal * 100) / 100))
-    //   .attr('opacity', 0)
-    //   .attr('y', d => {
-    //     return scaleY(d.data.city) + scaleY.bandwidth() / 2 + 6;
-    //   })
-    //   .attr('height', scaleY.bandwidth())
-    //   .attr('x', d => {
-    //     return scaleX(d.data.itemTotal) + CHART_PADDING.bar * 2;
-    //   })
-    //   .transition(t)
-    //   .delay(800)
-    //   .duration(800)
-    //   .attr('opacity', 0.9);
+    bars.exit().each(d => console.log('exit', d));
+
+    // hack to get around missing exiting data
+    const stackSeriesData = svg.selectAll('.stack-series').data();
+    const barTotalLabels = svg.select('.bars')
+      .selectAll('.bar-total-label')
+      .data(stackSeriesData[stackSeriesData.length - 1]);
+
+    barTotalLabels.exit().remove();
+
+    barTotalLabels.enter()
+      .append('text')
+      .attr('class', 'bar-total-label')
+      .attr('opacity', 0)
+      .attr('y', d => {
+        return scaleY(d.data.city) + scaleY.bandwidth() / 2 + 6;
+      })
+      .attr('height', scaleY.bandwidth())
+      .merge(barTotalLabels)
+      .text(d => '$' + (Math.round(d[1] * 100) / 100))
+      .transition(t)
+      .attr('x', d => {
+        console.log(d);
+        return scaleX(d[1]) + CHART_PADDING.bar * 2 + 15;
+      })
+   
+      .attr('opacity', 0.9);
   }
 
   function legendClick(item) {
